@@ -1,23 +1,29 @@
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Easy Shop</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<% request.setAttribute("title","login");%>
+<%@ include file="header.jsp"%>
 <%
+//验证是否已经登陆，是则跳到欢迎页
+
 String userID="";
 userID=(String)session.getAttribute("userID");
 if(userID!=null){
-	response.sendRedirect("/EasyShop/welcome.jsp");
+	response.sendRedirect("welcome.jsp");
+}
+
+%>
+
+<h1>Welcome to Easy Shop!</h1>
+<h3>
+<%
+String status=(String)request.getAttribute("status");
+if(status=="1"){
+	out.println("wrong Username or password! Please check again!");
+}
+	
+else{
+	out.println("please log in!");
 }
 %>
-<h1>Welcome to Easy Shop!</h1>
-<p>
-<%="please log in!"%>
-</p>
+</h3>
 <form role="form" name="loginForm" method="POST" action="checkLogin.jsp">
     <div class="form-group">
     <label for="exampleInputEmail1">User name</label>
@@ -34,11 +40,5 @@ if(userID!=null){
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
-
-
-
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+<a href="signUp.jsp"><button class="btn btn-default">Sign Up</button></a>
+<%@ include file="footer.jsp"%>

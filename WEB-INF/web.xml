@@ -1,9 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<!DOCTYPE web-app PUBLIC
-  '-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN'
-  'http://java.sun.com/j2ee/dtds/web-app_2_3.dtd'>
-
 <web-app>
 
   <servlet>
@@ -17,17 +11,17 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>checkLogin</servlet-name>
-    <servlet-class>mypack.LoginCheckerServlet</servlet-class>
+    <servlet-name>user</servlet-name>
+    <servlet-class>mypack.UserServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>checkLogin</servlet-name>
-    <url-pattern>/checkLogin</url-pattern>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file>hello.jsp </welcome-file>
+	  <welcome-file>login.jsp </welcome-file>
   </welcome-file-list>
 
   <resource-ref>

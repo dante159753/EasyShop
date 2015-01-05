@@ -10,8 +10,9 @@
 //获取参数
 int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
-String pageTotle=(String)request.getParameter("pageTotle");
+String pagetotal=(String)request.getParameter("pagetotal");
 String searchKey=(String)request.getParameter("searchKey");
+String totalInfo="";
 String attachPara="";/*翻页的时候将一块传查找字符串*/
 if(pageIndex==null)pageIndex="0";/*表示第一次进入当前结果，计算总页数*/
 if(searchKey!=null){
@@ -30,8 +31,12 @@ request.setAttribute("title","All Items");
 	<input type="submit" class="btn btn-default" value='search'/>
 </form>
 
-<div class='col-md-12'>
+<div class='col-md-1'>
 	<a href='showCart.jsp'><button type='button' class='btn btn-primary'>查看购物车</button></a>
+</div>
+
+<div class='col-md-11'>
+	<a href='showOrder.jsp'><button type='button' class='btn btn-primary'>我的订单</button></a>
 </div>
 
 <% if(searchKey!=null){
@@ -61,13 +66,13 @@ rs=stmt.executeQuery("select count(itemID) from item where itemName like '%"+sea
 
 //计算页数
 rs.first();
-int nTotle=rs.getInt(1);
-if(nTotle==0){
+int ntotal=rs.getInt(1);
+if(ntotal==0){
 out.print("<h2>抱歉，未找到符合的商品</h2>");
 }
 pageIndex="1";
-int pageSize=nTotle/itemPerPage+(nTotle%itemPerPage==0?0:1);
-pageTotle=Integer.toString(pageSize);
+int pageSize=ntotal/itemPerPage+(ntotal%itemPerPage==0?0:1);
+pagetotal=Integer.toString(pageSize);
 }
 int beginWith=itemPerPage*(Integer.parseInt(pageIndex)-1);
 //获取结果

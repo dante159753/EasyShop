@@ -10,10 +10,14 @@
 //获取参数
 int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
-String pageTotle=null;
-pageTotle=request.getParameter("pageTotle");
+String pagetotal=null;
+String totalInfo=(String)request.getParameter("totalInfo");
+pagetotal=request.getParameter("pagetotal");
 //表示第一次进入当前结果，计算总页数
-if(pageIndex==null)pageIndex="0";
+if(pageIndex==null){
+	pageIndex="0";
+	totalInfo="0";
+}
 String userID=(String)session.getAttribute("userID");
 String attachPara="";
 
@@ -33,23 +37,23 @@ request.setAttribute("title","Shopping Cart");
 
 <%
 //如果是第一次进入，计算总页数
-int nTotle=0;
 if(pageIndex.equals("0")){
 	//获取个数
 	rs=stmt.executeQuery("select count(scID) from shop_cart where uID='"+userID+"'");
 
 	//计算页数
 	rs.first();
-	nTotle=rs.getInt(1);
-	if(nTotle==0){
+	int ntotal=rs.getInt(1);
+	if(ntotal==0){
 		out.print("<h2 align='center'>您的购物车中还没有商品</h2>");
 	}
 	pageIndex="1";
-	int pageSize=nTotle/itemPerPage+(nTotle%itemPerPage==0?0:1);
-	pageTotle=Integer.toString(pageSize);
+	int pageSize=ntotal/itemPerPage+(ntotal%itemPerPage==0?0:1);
+	pagetotal=Integer.toString(pageSize);
+	totalInfo=Integer.toString(ntotal);
 }
 
-out.print("<h2 align='center'>购物车<small><em>共 "+nTotle+" 件商品， "+pageTotle+" 页</em></small></h2>");
+out.print("<h2 align='center'>购物车<small><em>共 "+totalInfo+" 件商品， "+pagetotal+" 页</em></small></h2>");
 
 int beginWith=itemPerPage*(Integer.parseInt(pageIndex)-1);
 //获取结果
@@ -65,11 +69,11 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 		</thead>
 		<tbody>
 		<%
-		int totlePrice=0;
+		int totalPrice=0;
 		while(rs.next()){
 			int quantity=rs.getInt(2);
 			int price=rs.getInt(4);
-			totlePrice+=quantity*price;
+			totalPrice+=quantity*price;
 		%>
 
 			<tr>
@@ -102,10 +106,17 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 
 </div>
 <div class='col-md-3'>
+<%
+if(!totalInfo.equals("0")){
+%>
 	<h4>订单总金额：</h4>
-	<h4>¥<%=totlePrice%></h4>
+	<h4>¥<%=totalPrice%></h4>
+	
 	<a href='orderManager.jsp?operation=0'><button type='button' class='btn btn-primary'>提交订单</button></a>
+<%
+}%>
 	<a href='showItem.jsp'><button type='button' class='btn btn-primary'>继续购物</button></a>
+	<a href='showOrder.jsp'><button type='button' class='btn btn-primary'>查看订单</button></a>
 </div>
 
 <%

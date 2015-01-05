@@ -29,7 +29,10 @@ response.sendRedirect("showItem.jsp");
 
 
 <%@ include file="header.jsp"%>
-
+<div class='col-md-12'>
+<a href='showItem.jsp'><button type='button' class='btn btn-primary'>返回</button></a>
+<a href='showCart.jsp'><button type='button' class='btn btn-primary'>查看购物车</button></a>
+</div>
 <div class='bs-callout bs-callout-warning col-md-12'>
 	
 	<div class='col-md-12'>
@@ -42,7 +45,7 @@ response.sendRedirect("showItem.jsp");
 		<h4>¥<%=rs.getString(5)%></h4>
 	</div>
 	<div class='col-md-3'>
-		<a href='cartManager.jsp?operation=0&itemID=<%=itemID%>'><button type='button' class='btn btn-primary'>add to cart</button></a>
+		<a href='cartManager.jsp?operation=0&itemID=<%=itemID%>'><button type='button' class='btn btn-primary'>加入购物车</button></a>
 	</div>
 	<div class='col-md-3'>
 		<h5>商品详情:<br/><%=rs.getString(4)%></h5>

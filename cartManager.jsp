@@ -8,6 +8,8 @@
 <%@ include file="checkLogStatus.jsp"%>
 
 <% 
+
+
 	Connection con;
 	Statement stmt;
 	ResultSet rs;

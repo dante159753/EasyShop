@@ -30,6 +30,10 @@ request.setAttribute("title","All Items");
 	<input type="submit" class="btn btn-default" value='search'/>
 </form>
 
+<div class='col-md-12'>
+	<a href='showCart.jsp'><button type='button' class='btn btn-primary'>查看购物车</button></a>
+</div>
+
 <% if(searchKey!=null){
 out.print("<a href='showItem.jsp'>返回全部结果</a>");
 }
@@ -106,6 +110,7 @@ con.close();
 String pageURL="showItem.jsp";
 
 %>
+
 <%@ include file="pages.jsp"%>
 
 

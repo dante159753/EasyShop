@@ -25,12 +25,16 @@ request.setAttribute("title","All Items");
 <%@ include file="header.jsp"%>
 <form class="form-inline" role="form" action="showItem.jsp">
 	<div class="form-group">
-		<label class="sr-only" for="exampleInputEmail2">请输入关键字</label>
-		<input type="text" class="form-control" name="searchKey" placeholder="请输入关键字">
+		<input type="text" class="form-control" name="searchKey" id="searchBar" value='<%if(searchKey!=null)out.print(searchKey);%>' placeholder="请输入关键字"/>
 	</div>
-
-	<button type="submit" class="btn btn-default">Search</button>
+	<input type="submit" class="btn btn-default" value='search'/>
 </form>
+
+<% if(searchKey!=null){
+out.print("<a href='showItem.jsp'>返回全部结果</a>");
+}
+%>
+
 <%
 Connection con;
 Statement stmt;
@@ -90,17 +94,19 @@ while(rs.next()){
 			<td><h5 class='info'><%=rs.getString(5)%></td>
 			</tr>
 
-			</tbody>
+		</tbody>
 
-		</table>
+	</table>
 
-	</div>
-	<%}
+</div>
+<%}
+rs.close();
+stmt.close();
+con.close();
+String pageURL="showItem.jsp";
 
-	String pageURL="showItem.jsp";
-
-	%>
-	<%@ include file="pages.jsp"%>
+%>
+<%@ include file="pages.jsp"%>
 
 
-	<%@ include file="footer.jsp"%>
+<%@ include file="footer.jsp"%>

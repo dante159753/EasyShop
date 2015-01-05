@@ -91,7 +91,7 @@ while(rs.next()){
 
 		<tr>
 			<td><img width='200' height='200' src='<%=rs.getString(3)%>'/></td>
-			<td><h5 class='info'><%=rs.getString(5)%></td>
+			<td><h5 class='info'>¥<%=rs.getString(5)%></td>
 			</tr>
 
 		</tbody>

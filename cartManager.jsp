@@ -85,7 +85,7 @@
 			return;
 		}
 		String changeTo=(String)request.getParameter("changeTo");
-		if(changeTo==null){
+		if(changeTo==null||changeTo.equals("")){
 			response.sendRedirect("showCart.jsp");
 			con.close();
 			stmt.close();
@@ -104,8 +104,10 @@
 			</jsp:forward>
 			<%
 		}
+		try{
 		stmt.executeUpdate("update shop_cart set quantity='"+changeTo+"' where uID='"+userID+"' and itemID='"+itemID+"'");
 		response.sendRedirect("showCart.jsp");
+		}catch(Exception e){out.println(e.getMessage());e.printStackTrace();}
 		con.close();
 		stmt.close();
 		rs.close();

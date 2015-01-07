@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,3 +12,4 @@
 <script src="js/easyshop.js"></script>
 </head>
 <body>
+	

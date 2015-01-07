@@ -7,7 +7,7 @@
 String userID="";
 userID=(String)session.getAttribute("userID");
 if(userID!=null){
-	response.sendRedirect("welcome.jsp");
+	response.sendRedirect("showItem.jsp");
 }
 
 %>

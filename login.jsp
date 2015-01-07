@@ -10,7 +10,7 @@ if(userID!=null){
 }
 
 %>
-
+<div class="wrapper wrapper-login center-block">
 <h1>Welcome to Easy Shop!</h1>
 <h3>
 <%
@@ -18,27 +18,28 @@ String status=(String)request.getAttribute("status");
 if(status=="1"){
 	out.println("wrong Username or password! Please check again!");
 }
-	
+
 else{
 	out.println("please log in!");
 }
 %>
 </h3>
-<form role="form" name="loginForm" method="POST" action="checkLogin.jsp">
+<form role="form" name="loginForm" method="POST" action="checkLogin.jsp" class="login-form">
     <div class="form-group">
-    <label for="exampleInputEmail1">User name</label>
-    <input type="text" class="form-control" name="username" placeholder="Enter username">
+    <label for="username">User name</label>
+    <input type="text" class="input-login" name="username" id="username" placeholder="Enter username">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name="password" placeholder="Password">
+    <label for="password">Password</label>
+    <input type="password" class="input-login" name="password" id="password" placeholder="Password">
   </div>
   <div class="checkbox">
     <label>
       <input type="checkbox"> Stay log in
     </label>
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn-login btn-login-submit">Submit</button>
+<a href="signUp.jsp"><button class="btn-login">Sign Up</button></a>
 </form>
-<a href="signUp.jsp"><button class="btn btn-default">Sign Up</button></a>
+</div>
 <%@ include file="footer.jsp"%>

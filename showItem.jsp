@@ -5,7 +5,7 @@
 <%@ page import="javax.naming.*"%>
 
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ include file="checkLogStatus.jsp"%>
+
 <% 
 //获取参数
 int itemPerPage=4;
@@ -24,20 +24,8 @@ request.setAttribute("title","All Items");
 }
 %>
 <%@ include file="header.jsp"%>
-<form class="form-inline" role="form" action="showItem.jsp">
-	<div class="form-group">
-		<input type="text" class="form-control" name="searchKey" id="searchBar" value='<%if(searchKey!=null)out.print(searchKey);%>' placeholder="请输入关键字"/>
-	</div>
-	<input type="submit" class="btn btn-default" value='search'/>
-</form>
-
-<div class='col-md-1'>
-	<a href='showCart.jsp'><button type='button' class='btn btn-primary'>查看购物车</button></a>
-</div>
-
-<div class='col-md-11'>
-	<a href='showOrder.jsp'><button type='button' class='btn btn-primary'>我的订单</button></a>
-</div>
+<%@ include file="navbar.jsp"%>
+<div class="container" style="margin-top:70px">
 
 <% if(searchKey!=null){
 out.print("<a href='showItem.jsp'>返回全部结果</a>");
@@ -82,10 +70,12 @@ rs=stmt.executeQuery("select * from item order by itemID limit "+Integer.toStrin
 else{
 rs=stmt.executeQuery("select * from item where itemName like '%"+searchKey+"%' order by itemID limit "+Integer.toString(beginWith)+","+Integer.toString(itemPerPage));
 }
-
+%>
+<div class="itemList">
+<%
 while(rs.next()){
 %>
-<div class='bs-callout bs-callout-warning col-md-9'>
+<div class='bs-callout bs-callout-warning'>
 	<h4>
 		<a href='itemDetail.jsp?itemID=<%=rs.getString(1)%>'>
 			<%=rs.getString(2)%>
@@ -108,7 +98,9 @@ while(rs.next()){
 	</table>
 
 </div>
-<%}
+<%}%>
+</div>
+<%
 rs.close();
 stmt.close();
 con.close();
@@ -118,5 +110,5 @@ String pageURL="showItem.jsp";
 
 <%@ include file="pages.jsp"%>
 
-
+</div>
 <%@ include file="footer.jsp"%>

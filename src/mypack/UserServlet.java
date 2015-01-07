@@ -35,5 +35,3 @@ public class LoginCheckerServlet extends HttpServlet {
 		}
 
 }
-
-

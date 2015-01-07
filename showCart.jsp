@@ -34,6 +34,7 @@ request.setAttribute("title","Shopping Cart");
 %>
 
 <%@ include file="header.jsp"%>
+<%@ include file="navbar.jsp"%>
 
 <%
 //如果是第一次进入，计算总页数

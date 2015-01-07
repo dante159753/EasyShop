@@ -12,13 +12,14 @@ int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=null;
 String totalInfo=(String)request.getParameter("totalInfo");
+String searchKey=null;
 pagetotal=request.getParameter("pagetotal");
 //表示第一次进入当前结果，计算总页数
 if(pageIndex==null){
 	pageIndex="0";
 	totalInfo="0";
 }
-String userID=(String)session.getAttribute("userID");
+//String userID=(String)session.getAttribute("userID");
 String attachPara="";
 
 Connection con;

@@ -12,13 +12,14 @@ int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=null;
 String totalInfo=(String)request.getParameter("totalInfo");
+String searchKey = null;
 pagetotal=request.getParameter("pagetotal");
 //表示第一次进入当前结果，计算总页数
 if(pageIndex==null){
 	pageIndex="0";
 	totalInfo="0";
 }
-String userID=(String)session.getAttribute("userID");
+// String userID=(String)session.getAttribute("userID");
 String attachPara="";
 
 Connection con;
@@ -35,7 +36,6 @@ request.setAttribute("title","Shopping Cart");
 
 <%@ include file="header.jsp"%>
 <%@ include file="navbar.jsp"%>
-
 <%
 //如果是第一次进入，计算总页数
 if(pageIndex.equals("0")){
@@ -60,6 +60,7 @@ int beginWith=itemPerPage*(Integer.parseInt(pageIndex)-1);
 //获取结果
 rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,item.price,item.itemImage from shop_cart,item where shop_cart.uID='"+userID+"' and shop_cart.itemID = item.itemID order by scID limit "+Integer.toString(beginWith)+","+Integer.toString(itemPerPage));
 %>
+<div class="container">
 <div class='bs-callout col-md-9'>
 	<table class="table table-hover">
 		<thead>
@@ -67,6 +68,7 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 			<th>商品名</th>
 			<th>价格</th>
 			<th>数量</th>
+			<th>操作</th>
 		</thead>
 		<tbody>
 		<%
@@ -92,7 +94,11 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 					  </div>
 					  <button type="submit" class="btn btn-default">submit</button>
 					</form>
-					<a href="cartManager.jsp?itemID=<%=rs.getString(1)%>&operation=2">删除</a>
+				</td>
+				<td>
+					<a href="javascript:changeNum()" id="changeNum">修改数量</a>
+					<a href="javascript:confirmNum()" id="confirmNum" hidden>确认修改</a>
+					<a href="javascript:confirmDelete(<%=rs.getString(1)%>, '<%=rs.getString(3)%>')" class="text-danger">删除商品</a>
 				</td>
 			</tr>
 
@@ -120,14 +126,24 @@ if(!totalInfo.equals("0")){
 	<a href='showOrder.jsp'><button type='button' class='btn btn-primary'>查看订单</button></a>
 </div>
 
+</div>
 <%
 rs.close();
 stmt.close();
 con.close();
 String pageURL="showCart.jsp";
 %>
+<script type="text/javascript">
+function confirmDelete(itemID, itemName) {
+	if(confirm("确认删除商品 " + itemName + " ?"))
+	location.href = "cartManager.jsp?itemID=" + itemID + "&operation=2";
+}
+function changeNum() {
+	$('#changeNum, #confirmNum').toggle();
+}
+function confirmNum() {
+	$('#changeNum, #confirmNum').toggle();
+}
+</script>
 <%@ include file="pages.jsp"%>
-
-
 <%@ include file="footer.jsp"%>
-

@@ -1,0 +1,32 @@
+html,
+body {
+
+}
+
+.wrapper-login {
+	max-width: 500px;
+	margin-top: 100px;
+}
+
+.input-login {
+	width: 100%;
+	outline: none;
+	border: 2px solid #6cf;
+	background: none;
+	padding: 10px;
+}
+
+.btn-login {
+	width: 30%;
+	height: 40px;
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	outline: none;
+	background-color: #6cf;
+	border: none;
+}
+
+.btn-login-submit {
+	width: 60%;
+}

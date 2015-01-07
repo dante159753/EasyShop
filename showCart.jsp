@@ -80,7 +80,7 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 
 			<tr>
 				<td><img width='120' height='120' src='<%=rs.getString(5)%>'/></td>
-				<td><h5><%=rs.getString(3)%></h5></td>
+				<td><a href='itemDetail.jsp?itemID=<%=rs.getString(1)%>'><h5><%=rs.getString(3)%></h5></a></td>
 				<td><h5>¥<%=rs.getString(4)%></h5></td>
 				<td>
 					<form method="post" class="form-inline" role="form" action='cartManager.jsp'>

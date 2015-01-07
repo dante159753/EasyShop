@@ -97,7 +97,7 @@
 			changeTo=Integer.toString(quantity+1);
 		}
 		//改成0,转给删除操作
-		if(changeTo.equals("0")){
+		if(Integer.parseInt(changeTo)<=0){
 			%>
 			<jsp:forward page="cartManager.jsp">
 			<jsp:param name="operation" value="2"/>

@@ -1,3 +1,4 @@
+<%String searchKey = null;%>
 <nav class="navbar navbar-default navbar-fixed-top">
 	 <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -13,7 +14,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left" role="search">
+      <form action="showItem.jsp" class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" name="searchKey" id="searchBar" value='<%if(searchKey!=null)out.print(searchKey);%>' placeholder="Search for items...">
         </div>

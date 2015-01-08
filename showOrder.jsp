@@ -21,7 +21,6 @@ if(pageIndex==null){
 if(totalInfo==null){
 	totalInfo="0";
 }
-String userID=(String)session.getAttribute("userID");
 String attachPara="";
 
 Connection con;
@@ -37,6 +36,7 @@ request.setAttribute("title","My Order");
 %>
 
 <%@ include file="header.jsp"%>
+<%@ include file="navbar.jsp"%>
 
 <%
 //如果是第一次进入，计算总页数
@@ -69,13 +69,14 @@ rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
 	"and order_list.oID = order_item.oID and order_item.itemID=item.itemID "+
 	"order by oID limit "+Integer.toString(beginWith)+","+Integer.toString(itemPerPage));*/
 %>
+<div class="container">
 <div class='bs-callout col-md-9'>
 	<table class="table table-hover">
 		<thead>
 			<th>订单价格</th>
 			<th>订单状态</th>
 			<th>下单时间</th>
-			<th/>
+			<th>操作</th>
 		</thead>
 		<tbody>
 		<%
@@ -96,11 +97,9 @@ rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
 				<td>
 				<%
 				if(rs.getString(5).equals("1"))
-				{
-					%>
-					<a href="orderManager.jsp?orderID=<%=rs.getString(1)%>&operation=2">取消订单</a>
-					<%
-				}%>
+				{%>
+					<a href="javascript:confirmCancel(<%=rs.getString(1)%>)">取消订单</a>
+				<%}%>
 				<a href="showOrderDetail.jsp?orderID=<%=rs.getString(1)%>&operation=2">订单详情</a>
 				</td>
 			</tr>
@@ -118,7 +117,13 @@ rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
 <div class='col-md-3'>
 	<a href='showItem.jsp'><button type='button' class='btn btn-primary'>继续购物</button></a>
 </div>
-
+</div>
+<script type="text/javascript">
+function confirmCancel(orderID) {
+	if(confirm("确认取消订单？"))
+		location.href = "orderManager.jsp?orderID=" + orderID + "&operation=2";
+}
+</script>
 <%
 rs.close();
 stmt.close();
@@ -126,7 +131,5 @@ con.close();
 String pageURL="showOrder.jsp";
 %>
 <%@ include file="pages.jsp"%>
-
-
 <%@ include file="footer.jsp"%>
 

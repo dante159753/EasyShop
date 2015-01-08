@@ -6,12 +6,14 @@
 
 <%@ page contentType="text/html; charset=utf-8" %>
 
+<%@ include file="header.jsp"%>
+<%@ include file="navbar.jsp"%>
 <% 
 //获取参数
 int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=(String)request.getParameter("pagetotal");
-String searchKey=(String)request.getParameter("searchKey");
+searchKey=(String)request.getParameter("searchKey");
 String totalInfo="";
 String attachPara="";/*翻页的时候将一块传查找字符串*/
 if(pageIndex==null)pageIndex="0";/*表示第一次进入当前结果，计算总页数*/
@@ -23,8 +25,6 @@ else{
 request.setAttribute("title","All Items");
 }
 %>
-<%@ include file="header.jsp"%>
-<%@ include file="navbar.jsp"%>
 <div class="container" style="margin-top:70px">
 
 <% if(searchKey!=null){
@@ -71,11 +71,21 @@ else{
 rs=stmt.executeQuery("select * from item where itemName like '%"+searchKey+"%' order by itemID limit "+Integer.toString(beginWith)+","+Integer.toString(itemPerPage));
 }
 %>
-<div class="itemList">
+<div class="itemList row">
 <%
 while(rs.next()){
 %>
-<div class='bs-callout bs-callout-warning'>
+<div class="col-md-4">
+<div class="thumbnail" style="height:400px">
+      <img data-src="holder.js/300x300" width="200" height="200" src="<%=rs.getString(3)%>" alt="...">
+      <div class="caption">
+        <h3><%=rs.getString(3)%></h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+    </div>
+<!-- <div class='bs-callout bs-callout-warning'>
 	<h4>
 		<a href='itemDetail.jsp?itemID=<%=rs.getString(1)%>'>
 			<%=rs.getString(2)%>
@@ -97,7 +107,7 @@ while(rs.next()){
 
 	</table>
 
-</div>
+</div> -->
 <%}%>
 </div>
 <%

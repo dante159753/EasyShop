@@ -29,9 +29,11 @@ response.sendRedirect("showItem.jsp");
 
 
 <%@ include file="header.jsp"%>
+<%@ include file="navbar.jsp"%>
+
+<div class="container">
 <div class='col-md-12'>
 <a href='showItem.jsp'><button type='button' class='btn btn-primary'>返回</button></a>
-<a href='showCart.jsp'><button type='button' class='btn btn-primary'>查看购物车</button></a>
 </div>
 <div class='bs-callout bs-callout-warning col-md-12'>
 	
@@ -45,14 +47,26 @@ response.sendRedirect("showItem.jsp");
 		<h4>¥<%=rs.getString(5)%></h4>
 	</div>
 	<div class='col-md-3'>
-		<a href='cartManager.jsp?operation=0&itemID=<%=itemID%>'><button type='button' class='btn btn-primary'>加入购物车</button></a>
+		<a href='javascript:appendToCart(<%=itemID%>)' class='btn btn-primary'>加入购物车</a>
 	</div>
 	<div class='col-md-3'>
 		<h5>商品详情:<br/><%=rs.getString(4)%></h5>
 	</div>
 </div>
-
-
+</div>
+<script type="text/javascript">
+function appendToCart(itemID) {
+	var url = "cartManager.jsp?operation=0&itemID=" + itemID;
+	htmlobj = $.ajax({
+		url: url,
+		type: 'POST',
+		async: false,
+		success: function() {
+			alert('已添加到购物车！');
+		}
+	});
+}
+</script>
 
 <%@ include file="footer.jsp"%>
 

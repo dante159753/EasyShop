@@ -12,7 +12,6 @@ int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=null;
 String totalInfo=(String)request.getParameter("totalInfo");
-String searchKey = null;
 pagetotal=request.getParameter("pagetotal");
 //表示第一次进入当前结果，计算总页数
 if(pageIndex==null){
@@ -81,23 +80,23 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 
 			<tr>
 				<td><img width='120' height='120' src='<%=rs.getString(5)%>'/></td>
-				<td><h5><%=rs.getString(3)%></h5></td>
+				<td><a href="itemDetail.jsp?itemID=<%=rs.getString(1)%>"><h5><%=rs.getString(3)%></h5></a></td>
 				<td><h5>¥<%=rs.getString(4)%></h5></td>
 				<td>
-					<form method="post" class="form-inline" role="form" action='cartManager.jsp'>
-					  <h5><%=rs.getString(2)%></h5>
+					<h5 id="currNum"><%=rs.getString(2)%></h5>
+					<form method="post" class="form-inline" role="form" action='cartManager.jsp' id="f" hidden>
 					  <div class="form-group">
 						<label class="sr-only" for="inputChangeNumber">change number</label>
-						<input type="text" class="form-control" id="inputChangeNumber" placeholder="输入修改数量" name="changeTo"/>
+						<input type="text" class="form-control" id="inputChangeNumber" placeholder="输入修改数量" name="changeTo" value="<%=rs.getString(2)%>" size="1"/>
 						<input type="hidden" name="operation" value="1">
 						<input type="hidden" name="itemID" value='<%=rs.getString(1)%>'>
 					  </div>
-					  <button type="submit" class="btn btn-default">submit</button>
+					  <!-- <button type="submit" class="btn btn-default">submit</button> -->
 					</form>
 				</td>
 				<td>
 					<a href="javascript:changeNum()" id="changeNum">修改数量</a>
-					<a href="javascript:confirmNum()" id="confirmNum" hidden>确认修改</a>
+					<a href="javascript:$('#f').submit()" id="confirmNum" hidden>确认修改</a><br>
 					<a href="javascript:confirmDelete(<%=rs.getString(1)%>, '<%=rs.getString(3)%>')" class="text-danger">删除商品</a>
 				</td>
 			</tr>
@@ -113,19 +112,21 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 
 </div>
 <div class='col-md-3'>
+	<div class="panel panel-default">
+		<div class="panel-body">
 <%
 if(!totalInfo.equals("0")){
 %>
-	<h4>订单总金额：</h4>
+	<h4 class="page-header">订单总金额：</h4>
 	<h4>¥<%=totalPrice%></h4>
 	
-	<a href='orderManager.jsp?operation=0'><button type='button' class='btn btn-primary'>提交订单</button></a>
+	<a href='orderManager.jsp?operation=0' class="btn btn-primary btn-block">提交订单</a>
 <%
 }%>
-	<a href='showItem.jsp'><button type='button' class='btn btn-primary'>继续购物</button></a>
-	<a href='showOrder.jsp'><button type='button' class='btn btn-primary'>查看订单</button></a>
+	<a href='showItem.jsp' class="btn btn-default btn-block">继续购物</a>
+	</div>
 </div>
-
+</div>
 </div>
 <%
 rs.close();
@@ -139,7 +140,8 @@ function confirmDelete(itemID, itemName) {
 	location.href = "cartManager.jsp?itemID=" + itemID + "&operation=2";
 }
 function changeNum() {
-	$('#changeNum, #confirmNum').toggle();
+	$('#changeNum, #confirmNum, #f, #currNum').toggle();
+	$('#inputChangeNumber').select();
 }
 function confirmNum() {
 	$('#changeNum, #confirmNum').toggle();

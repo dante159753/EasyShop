@@ -95,7 +95,7 @@ rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
 					<%=rs.getString(6)%>
 					<%
 					if(rs.getString(5).equals("1")){
-						out.print("<a href='orderManager.jsp?operation=1&orderID="+rs.getString(1)+"'><button type='button' class='btn btn-primary'>支付</button></a>");
+						out.print("<a href='orderManager.jsp?operation=1&orderID="+rs.getString(1)+"'><button type='button' class='btn btn-primary btn-xs'>支付</button></a>");
 					}
 					%>
 				</td>

@@ -25,7 +25,6 @@ if(!rs.next()){
 response.sendRedirect("showItem.jsp");
 }
 
-String searchKey=null;
 %>
 
 

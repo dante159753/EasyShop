@@ -11,8 +11,8 @@ if(userID!=null){
 }
 
 %>
-
-<h1>Sign Up</h1>
+<div class="wrapper-login center-block">
+<h1 class="text-center">注册到 EasyShop</h1>
 <h3>
 <%
 String status=(String)request.getAttribute("status");
@@ -29,18 +29,19 @@ if(status=="2"){
 </h3>
 <form role="form" name="loginForm" method="POST" action="checkSignUp.jsp">
     <div class="form-group">
-    <label for="exampleInputEmail1">User name</label>
+    <label for="exampleInputEmail1">用户名</label>
     <input type="text" class="form-control" name="username" placeholder="Enter username">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
+    <label for="exampleInputPassword1">密码</label>
     <input type="password" class="form-control" name="password" placeholder="Password">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Repeat Password</label>
+    <label for="exampleInputPassword1">确认密码</label>
     <input type="password" class="form-control" name="repeatPassword" placeholder="repeatPassword">
   </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-default">提交</button>
 </form>
+</div>
 <%@ include file="footer.jsp"%>
 

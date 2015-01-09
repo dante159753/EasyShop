@@ -32,7 +32,6 @@ stmt = con.createStatement();
 
 request.setAttribute("title","Shopping Cart");
 
-String searchKey=null;
 %>
 
 <%@ include file="header.jsp"%>

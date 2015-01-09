@@ -1,5 +1,4 @@
-<%String searchKey = null;%>
-<nav class="navbar navbar-default navbar-fixed-top">
+﻿<nav class="navbar navbar-default navbar-fixed-top">
 	 <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -16,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form action="showItem.jsp" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" name="searchKey" id="searchBar" value='<%if(searchKey!=null)out.print(searchKey);%>' placeholder="Search for items...">
+          <input type="text" class="form-control" name="searchKey" id="searchBar" <%if(searchKey!=null)out.print("value='"+searchKey+"'");%> placeholder="Search for items...">
         </div>
         <button type="submit" class="btn btn-default">Search</button>
       </form>

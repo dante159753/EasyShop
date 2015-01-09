@@ -1,4 +1,4 @@
-<center>
+﻿<center>
 	<%
 	for(int i=0;i<Integer.parseInt(pagetotal);i++){
 	%>

@@ -55,7 +55,7 @@
 		Date dt = new Date(); 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String currentTime=sdf.format(dt);
-		out.print(currentTime);
+		//out.print(currentTime);
 		
 		//创建订单
 		stmt.executeUpdate("insert into order_list(uID,price,time) values('"+userID+"','"+totalPrice+"','"+currentTime+"')");
@@ -118,7 +118,9 @@
 		rs=stmt.executeQuery("select * from order_list where oID='"+orderID+"'");
 		if(rs.next()){
 			if(rs.getString(5).equals("1")){//只有未支付时可以删除
+				//删除订单
 				stmt.executeUpdate("delete from order_list where oID='"+orderID+"'");
+				//删除订单物品
 				stmt.executeUpdate("delete from order_item where oID='"+orderID+"'");
 			}
 		}

@@ -1,4 +1,4 @@
-<%@ page import="java.io.*"%>
+﻿<%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="javax.sql.*"%>
@@ -25,6 +25,8 @@ rs=stmt.executeQuery("select * from item where itemID='"+itemID+"'");
 if(!rs.next()){
 response.sendRedirect("showItem.jsp");
 }
+
+String searchKey=null;
 %>
 
 

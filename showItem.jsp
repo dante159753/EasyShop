@@ -4,10 +4,11 @@
 <%@ page import="javax.sql.*"%>
 <%@ page import="javax.naming.*"%>
 
-<%@ page contentType="text/html; charset=utf-8" %>
-<meta. http-equiv="Content-Type" content="text/html; charset=gb2312">
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <% 
+request.setCharacterEncoding("UTF-8");
+response.setCharacterEncoding("UTF-8");
 //获取参数
 int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");

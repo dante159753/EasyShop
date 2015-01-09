@@ -8,6 +8,9 @@
 <%@ include file="checkLogStatus.jsp"%>
 
 <% 
+request.setCharacterEncoding("UTF-8");
+response.setCharacterEncoding("UTF-8");
+
 Connection con;
 Statement stmt;
 ResultSet rs;

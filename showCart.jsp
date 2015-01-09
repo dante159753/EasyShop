@@ -7,6 +7,8 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ include file="checkLogStatus.jsp"%>
 <% 
+request.setCharacterEncoding("UTF-8");
+response.setCharacterEncoding("UTF-8");
 //获取参数
 int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");

@@ -1,4 +1,5 @@
-﻿<nav class="navbar navbar-default navbar-fixed-top">
+﻿<%String searchKey = null;%>
+<nav class="navbar navbar-default navbar-fixed-top">
 	 <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -15,27 +16,27 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <form action="showItem.jsp" class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" name="searchKey" id="searchBar" <%if(searchKey!=null)out.print("value='"+searchKey+"'");%> placeholder="Search for items...">
+          <input type="text" class="form-control" name="searchKey" id="searchBar" <%if(searchKey!=null)out.print("value='"+searchKey+"'");%> placeholder="输入关键字...">
         </div>
-        <button type="submit" class="btn btn-default">Search</button>
+        <button type="submit" class="btn btn-default">搜索</button>
       </form>
       <%String userID="";
 userID=(String)session.getAttribute("userID");
 if(userID==null){
 %>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="login.jsp">Sign in</a></li>
-        <li><a href="signUp.jsp">Sign up</a></li>
+        <li class="active"><a href="login.jsp">登录</a></li>
+        <li><a href="signUp.jsp">注册</a></li>
       </ul>
       <%}else{%>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=session.getAttribute("username")%> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="showCart.jsp">Shopping cart</a></li>
-            <li><a href="showOrder.jsp">My orders</a></li>
+            <li><a href="showCart.jsp">购物车</a></li>
+            <li><a href="showOrder.jsp">我的订单</a></li>
             <li class="divider"></li>
-            <li><a href="deleteSession.jsp">Log out</a></li>
+            <li><a href="deleteSession.jsp">注销</a></li>
           </ul>
         </li>
       </ul>

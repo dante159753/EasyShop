@@ -29,14 +29,16 @@ request.setAttribute("title","Order Detail");
 %>
 
 <%@ include file="header.jsp"%>
-
+<%@ include file="navbar.jsp"%>
+<div class="container">
 <h2 align='center'>订单详情</h2>
-<a href='showOrder.jsp'><button type='button' class='btn btn-primary'>返回</button></a>
 
 <div class='col-md-12'>
 	<table class="table table-hover">
-
-			<tr>
+<thead>
+						<tr><th colspan="2">
+<a href='showOrder.jsp' class='btn btn-default btn-block'>返回</a></th></tr>
+			<tr></thead>
 				<td>订单号</td>
 				<td><%=rs.getString(1)%></td>
 			</tr>
@@ -73,18 +75,29 @@ while(rs.next()){
 						</tr>
 <%}
 %>
+
 					</table>
 					
 				</td>
 			</tr>
-
+<tr>
+	<td colspan="2">
+		<a href='javascript:confirmCancel(<%=request.getParameter("orderID")%>)' class="btn btn-danger btn-block">取消订单</a>
+	</td>
+</tr>
 
 	</table>
+</div>
 </div>
 
 
 
-
+<script type="text/javascript">
+function confirmCancel(orderID) {
+	if(confirm("确认取消订单？"))
+		location.href = "orderManager.jsp?orderID=" + orderID + "&operation=2";
+}
+</script>
 
 
 <%@ include file="footer.jsp"%>

@@ -26,7 +26,7 @@ else{
 </h3>
 <form role="form" name="loginForm" method="POST" action="checkLogin.jsp" class="login-form">
     <div class="form-group">
-    <label for="username">User name</label>
+    <label for="username">Username</label>
     <input type="text" class="input-login" name="username" id="username" placeholder="Enter username">
   </div>
   <div class="form-group">

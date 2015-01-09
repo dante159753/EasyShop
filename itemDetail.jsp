@@ -5,7 +5,6 @@
 <%@ page import="javax.naming.*"%>
 
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ include file="checkLogStatus.jsp"%>
 
 <% 
 Connection con;
@@ -49,7 +48,11 @@ String searchKey=null;
 		<h4>¥<%=rs.getString(5)%></h4>
 	</div>
 	<div class='col-md-3'>
+		<% if (userID == null) {%>
+		<a href='login.jsp' class='btn btn-primary'>加入购物车</a>
+		<%}else{%>
 		<a href='javascript:appendToCart(<%=itemID%>)' class='btn btn-primary'>加入购物车</a>
+		<%}%>
 	</div>
 	<div class='col-md-3'>
 		<h5>商品详情:<br/><%=rs.getString(4)%></h5>

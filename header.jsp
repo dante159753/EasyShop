@@ -12,4 +12,3 @@
 <script src="js/easyshop.js"></script>
 </head>
 <body>
-	

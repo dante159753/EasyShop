@@ -35,3 +35,13 @@ body {
 .btn-login-submit {
 	width: 60%;
 }
+
+.thumbnail .caption {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.thumbnail .caption > a {
+	
+}

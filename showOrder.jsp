@@ -35,8 +35,6 @@ con=ds.getConnection();
 stmt = con.createStatement();
 
 request.setAttribute("title","My Order");
-
-String searchKey=null;
 %>
 
 <%@ include file="header.jsp"%>
@@ -99,7 +97,7 @@ rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
 					<%=rs.getString(6)%>
 					<%
 					if(rs.getString(5).equals("1")){
-						out.print("<a href='orderManager.jsp?operation=1&orderID="+rs.getString(1)+"'><button type='button' class='btn btn-primary'>支付</button></a>");
+						out.print("<a href='orderManager.jsp?operation=1&orderID="+rs.getString(1)+"'><button type='button' class='btn btn-primary btn-xs'>支付</button></a>");
 					}
 					%>
 				</td>
@@ -125,7 +123,11 @@ rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
 
 </div>
 <div class='col-md-3'>
-	<a href='showItem.jsp'><button type='button' class='btn btn-primary'>继续购物</button></a>
+	<div class="panel panel-default">
+		<div class="panel-body">
+	<a href='showItem.jsp' class="btn btn-default btn-block">继续购物</a>
+	</div>
+</div>
 </div>
 </div>
 <script type="text/javascript">

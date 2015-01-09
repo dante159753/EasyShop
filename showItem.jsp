@@ -10,7 +10,7 @@
 <%@ include file="navbar.jsp"%>
 <% 
 //获取参数
-int itemPerPage=4;
+int itemPerPage=10;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=(String)request.getParameter("pagetotal");
 searchKey=(String)request.getParameter("searchKey");
@@ -75,11 +75,11 @@ rs=stmt.executeQuery("select * from item where itemName like '%"+searchKey+"%' o
 <%
 while(rs.next()){
 %>
-<div class="col-md-4">
+<div class="col-md-3">
 <div class="thumbnail" style="height:400px">
-      <img data-src="holder.js/300x300" width="200" height="200" src="<%=rs.getString(3)%>" alt="...">
+      <img data-src="<%=rs.getString(3)%>" width="200" height="200" src="<%=rs.getString(3)%>" alt="...">
       <div class="caption">
-        <h3><%=rs.getString(3)%></h3>
+        <h3><%=rs.getString(2)%></h3>
         <p>...</p>
         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>

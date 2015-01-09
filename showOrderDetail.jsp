@@ -1,4 +1,4 @@
-<%@ page import="java.io.*"%>
+﻿<%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="javax.sql.*"%>
@@ -25,7 +25,10 @@ rs=stmt.executeQuery("select * from order_list where oID='"+orderID+"'");
 if(!rs.next()){
 response.sendRedirect("showOrder.jsp");
 }
+request.setAttribute("title","Order Detail");
 %>
+
+<%@ include file="header.jsp"%>
 
 <h2 align='center'>订单详情</h2>
 <a href='showOrder.jsp'><button type='button' class='btn btn-primary'>返回</button></a>
@@ -79,9 +82,6 @@ while(rs.next()){
 	</table>
 </div>
 
-
-
-<%@ include file="header.jsp"%>
 
 
 

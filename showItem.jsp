@@ -1,19 +1,18 @@
-<%@ page import="java.io.*"%>
+﻿<%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="javax.sql.*"%>
 <%@ page import="javax.naming.*"%>
 
 <%@ page contentType="text/html; charset=utf-8" %>
+<meta. http-equiv="Content-Type" content="text/html; charset=gb2312">
 
-<%@ include file="header.jsp"%>
-<%@ include file="navbar.jsp"%>
 <% 
 //获取参数
 int itemPerPage=4;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=(String)request.getParameter("pagetotal");
-searchKey=(String)request.getParameter("searchKey");
+String searchKey=(String)request.getParameter("searchKey");
 String totalInfo="";
 String attachPara="";/*翻页的时候将一块传查找字符串*/
 if(pageIndex==null)pageIndex="0";/*表示第一次进入当前结果，计算总页数*/
@@ -25,6 +24,11 @@ else{
 request.setAttribute("title","All Items");
 }
 %>
+<!--在设置title后加载头，否则会没有标题-->
+<%@ include file="header.jsp"%>
+<!--searchKey 先在前面获取，后面才能在搜索框显示相应搜索文字-->
+<%@ include file="navbar.jsp"%>
+
 <div class="container" style="margin-top:70px">
 
 <% if(searchKey!=null){
@@ -79,7 +83,7 @@ while(rs.next()){
 <div class="thumbnail" style="height:400px">
       <img data-src="holder.js/300x300" width="200" height="200" src="<%=rs.getString(3)%>" alt="...">
       <div class="caption">
-        <h3><%=rs.getString(3)%></h3>
+        <h3><%=rs.getString(2)%></h3>
         <p>...</p>
         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>

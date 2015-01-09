@@ -1,4 +1,4 @@
-<%@ page import="java.io.*"%>
+﻿<%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="javax.sql.*"%>
@@ -33,10 +33,15 @@ con=ds.getConnection();
 stmt = con.createStatement();
 
 request.setAttribute("title","My Order");
+
+String searchKey=null;
 %>
 
 <%@ include file="header.jsp"%>
 <%@ include file="navbar.jsp"%>
+<!--换行，不然导航条会把内容遮住-->
+<br/>
+<br/>
 
 <%
 //如果是第一次进入，计算总页数
@@ -48,16 +53,19 @@ if(pageIndex.equals("0")){
 	//计算页数
 	rs.first();
 	ntotal=rs.getInt(1);
-	if(ntotal==0){
-		out.print("<h2 align='center'>您还没有购买商品</h2>");
-	}
 	pageIndex="1";
 	int pageSize=ntotal/itemPerPage+(ntotal%itemPerPage==0?0:1);
 	pagetotal=Integer.toString(pageSize);
 	totalInfo=Integer.toString(ntotal);
+	out.print("<h2 align='center'>订单列表<small><em>共 "+totalInfo+" 项订单， "+pagetotal+" 页</em></small></h2>");
+	
+	if(ntotal==0){
+		out.print("<h2 align='center'>您还没有购买商品</h2>");
+	}
 }
-
-out.print("<h2 align='center'>订单列表<small><em>共 "+totalInfo+" 项订单， "+pagetotal+" 页</em></small></h2>");
+else{
+	out.print("<h2 align='center'>订单列表<small><em>共 "+totalInfo+" 项订单， "+pagetotal+" 页</em></small></h2>");
+}
 
 int beginWith=itemPerPage*(Integer.parseInt(pageIndex)-1);
 //获取结果

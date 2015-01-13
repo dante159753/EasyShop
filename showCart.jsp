@@ -34,14 +34,14 @@ stmt = con.createStatement();
 
 request.setAttribute("title","Shopping Cart");
 
+String searchKey=null;
+
 %>
 
 <%@ include file="header.jsp"%>
 <%@ include file="navbar.jsp"%>
 
-<!--换行，不然导航条会把内容遮住-->
-<br/>
-<br/>
+<br/><br/>
 
 <%
 //如果是第一次进入，计算总页数
@@ -68,6 +68,15 @@ else{
 
 int beginWith=itemPerPage*(Integer.parseInt(pageIndex)-1);
 //获取结果
+rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,item.price,item.itemImage from shop_cart,item where shop_cart.uID='"+userID+"' and shop_cart.itemID = item.itemID order by scID ");
+
+int totalPrice=0;
+while(rs.next()){
+	int quantity=rs.getInt(2);
+	int price=rs.getInt(4);
+	totalPrice+=quantity*price;
+}
+			
 rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,item.price,item.itemImage from shop_cart,item where shop_cart.uID='"+userID+"' and shop_cart.itemID = item.itemID order by scID limit "+Integer.toString(beginWith)+","+Integer.toString(itemPerPage));
 %>
 <div class="container">
@@ -82,11 +91,11 @@ rs=stmt.executeQuery("select shop_cart.itemID,shop_cart.quantity,item.itemName,i
 		</thead>
 		<tbody>
 		<%
-		int totalPrice=0;
+		//int totalPrice=0;
 		while(rs.next()){
-			int quantity=rs.getInt(2);
-			int price=rs.getInt(4);
-			totalPrice+=quantity*price;
+			//int quantity=rs.getInt(2);
+			//int price=rs.getInt(4);
+			//totalPrice+=quantity*price;
 		%>
 
 			<tr>

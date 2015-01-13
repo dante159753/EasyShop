@@ -52,7 +52,7 @@ try{
 		session.setAttribute("userID",rs.getString(1));
 		session.setAttribute("username",rs.getString(2));
 
-		response.sendRedirect("welcome.jsp");
+		response.sendRedirect("showItem.jsp");
 	}
 	
 	

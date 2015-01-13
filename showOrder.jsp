@@ -35,13 +35,13 @@ con=ds.getConnection();
 stmt = con.createStatement();
 
 request.setAttribute("title","My Order");
+
+String searchKey=null;
 %>
 
 <%@ include file="header.jsp"%>
 <%@ include file="navbar.jsp"%>
-<!--换行，不然导航条会把内容遮住-->
-<br/>
-<br/>
+<br/><br/>
 
 <%
 //如果是第一次进入，计算总页数

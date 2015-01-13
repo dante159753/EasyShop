@@ -6,10 +6,7 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<!--在设置title后加载头，否则会没有标题-->
-<%@ include file="header.jsp"%>
-<!--searchKey 先在前面获取，后面才能在搜索框显示相应搜索文字-->
-<%@ include file="navbar.jsp"%>
+
 <% 
 request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
@@ -17,7 +14,7 @@ response.setCharacterEncoding("UTF-8");
 int itemPerPage=8;
 String pageIndex=(String)request.getParameter("pageIndex");
 String pagetotal=(String)request.getParameter("pagetotal");
-searchKey=(String)request.getParameter("searchKey");
+String searchKey=(String)request.getParameter("searchKey");
 String totalInfo="";
 String attachPara="";/*翻页的时候将一块传查找字符串*/
 if(pageIndex==null)pageIndex="0";/*表示第一次进入当前结果，计算总页数*/
@@ -30,8 +27,25 @@ request.setAttribute("title","All Items");
 }
 %>
 
-<div class="container" style="margin-top:70px">
+<!--在设置title后加载头，否则会没有标题-->
+<%@ include file="header.jsp"%>
+<!--searchKey 先在前面获取，后面才能在搜索框显示相应搜索文字-->
+<%@ include file="navbar.jsp"%>
 
+<div class="container" style="margin-top:70px"/>
+
+<style type="text/css">
+.thumbnail{
+    width: 230px;
+    height: 300px;
+    overflow: auto;
+}
+
+.thumbnail img{
+width: 200px;
+height: 200px;
+}
+</style>
 <% if(searchKey!=null){
 out.print("<a href='showItem.jsp'>返回全部结果</a>");
 }
@@ -80,10 +94,10 @@ rs=stmt.executeQuery("select * from item where itemName like '%"+searchKey+"%' o
 <%
 while(rs.next()){
 %>
-<div class="col-md-3">
-<div class="thumbnail" style="">
+<div class="col-md-3 col-sm-3">
+<div class="thumbnail">
 	<a href="itemDetail.jsp?itemID=<%=rs.getString(1)%>" title="<%=rs.getString(2)%>">
-      <img data-src="<%=rs.getString(3)%>" width="200" height="200" src="<%=rs.getString(3)%>" alt="...">
+      <img  data-src="<%=rs.getString(3)%>" width="200" height="200" src="<%=rs.getString(3)%>" alt="...">
   </a>
       <div class="caption">
         <a href="itemDetail.jsp?itemID=<%=rs.getString(1)%>" title="<%=rs.getString(2)%>"><%=rs.getString(2)%></a>

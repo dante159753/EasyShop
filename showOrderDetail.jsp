@@ -24,15 +24,20 @@ String orderID=request.getParameter("orderID");
 if(orderID==null){
 response.sendRedirect("showOrder.jsp");
 }
-rs=stmt.executeQuery("select * from order_list where oID='"+orderID+"'");
+//rs=stmt.executeQuery("select * from order_list where oID='"+orderID+"'");
+rs=stmt.executeQuery("select order_list.*,order_status.osInfo "+
+	"from order_list,order_status where order_list.oID='"+orderID+"' and order_status.osID=order_list.oStatus ");
 if(!rs.next()){
 response.sendRedirect("showOrder.jsp");
 }
 request.setAttribute("title","Order Detail");
+
+String searchKey=null;
 %>
 
 <%@ include file="header.jsp"%>
 <%@ include file="navbar.jsp"%>
+<br/><br/>
 <div class="container">
 <h2 align='center'>订单详情</h2>
 
@@ -55,7 +60,7 @@ request.setAttribute("title","Order Detail");
 			</tr>
 			<tr>
 				<td>状态</td>
-				<td><%=rs.getString(5)%></td>
+				<td><%=rs.getString(6)%></td>
 			</tr>
 			<tr>
 				<td>商品</td>
@@ -64,6 +69,7 @@ request.setAttribute("title","Order Detail");
 <%
 rs=stmt.executeQuery("select item.itemID,order_item.quantity,item.itemName,item.itemImage,item.price "+
 	"from order_item,item where order_item.oID='"+orderID+"' and order_item.itemID=item.itemID");
+
 while(rs.next()){
 %>
 						<tr>

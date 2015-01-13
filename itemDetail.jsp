@@ -27,13 +27,15 @@ rs=stmt.executeQuery("select * from item where itemID='"+itemID+"'");
 if(!rs.next()){
 response.sendRedirect("showItem.jsp");
 }
+request.setAttribute("title","item detail");
+String searchKey=null;
 
 %>
 
 
 <%@ include file="header.jsp"%>
 <%@ include file="navbar.jsp"%>
-
+<br/><br/><br/>
 <div class="container">
 <div class='col-md-12'>
 <a href='showItem.jsp'><button type='button' class='btn btn-primary'>返回</button></a>
@@ -44,7 +46,7 @@ response.sendRedirect("showItem.jsp");
 		<h2 align='center'><%=rs.getString(2)%></h2>
 	</div>
 	<div class='col-md-9'>
-		<img src='<%=rs.getString(3)%>' />
+		<img width='700' src='<%=rs.getString(3)%>' />
 	</div>
 	<div class='col-md-3'>
 		<h4>¥<%=rs.getString(5)%></h4>

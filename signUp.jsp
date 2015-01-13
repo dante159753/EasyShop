@@ -4,13 +4,14 @@
 <%
 //验证是否已经登陆，是则跳到欢迎页
 
-String userID="";
-userID=(String)session.getAttribute("userID");
-if(userID!=null){
+String check_userID="";
+check_userID=(String)session.getAttribute("userID");
+if(check_userID!=null){
 	response.sendRedirect("showItem.jsp");
 }
-
+String searchKey=null;
 %>
+<%@ include file="navbar.jsp"%>
 <div class="wrapper-login center-block">
 <h1 class="text-center">注册到 EasyShop</h1>
 <h3>
